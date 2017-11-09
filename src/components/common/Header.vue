@@ -12,9 +12,8 @@
                     {{username}}
                     <el-button type="primary" @click="handleCommand('login')" command="login">请登录</el-button>
                 </span>
-
-                <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item  command="loginout">退出</el-dropdown-item>
+                <el-dropdown-menu v-if="!!username" slot="dropdown">
+                    <el-dropdown-item command="loginout">退出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -30,14 +29,15 @@
         },
         computed:{
             username(){
-                let username = localStorage.getItem('ms_username');
+                let username = localStorage.getItem('USERNAME');
                 return username ? username : this.name;
             }
         },
         methods:{
             handleCommand(command) {
                 if(command == 'loginout'){
-                    localStorage.removeItem('ms_username');
+                    localStorage.removeItem('USERNAME');
+                    localStorage.removeItem('JWT_TOKEN');
                     this.$router.go(0);
                 }else if(command == 'login'){
                     this.$router.push('/login');

@@ -71,7 +71,7 @@
                         }
                     }
                     if(!is_del){
-                        if(d.address.indexOf(self.select_cate) > -1 && 
+                        if(d.address.indexOf(self.select_cate) > -1 &&
                             (d.name.indexOf(self.select_word) > -1 ||
                             d.address.indexOf(self.select_word) > -1)
                         ){
@@ -89,10 +89,10 @@
             getData(){
                 let self = this;
                 if(process.env.NODE_ENV === 'development'){
-                    self.url = '/ms/table/list';
+                    self.url = '/ms/crmxxd/msc';
                 };
-                self.$axios.post(self.url, {page:self.cur_page}).then((res) => {
-                    self.tableData = res.data.list;
+                self.$axios.get(self.url, {page:self.cur_page}).then((res) => {
+                    self.tableData = res.data.dataall.projects;
                 })
             },
             search(){

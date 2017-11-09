@@ -7,7 +7,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: '/Readme'
+            redirect: '/IndexReadme'
         },
         {
             path: '/readme',
@@ -19,7 +19,7 @@ export default new Router({
                 },
                 {
                     path: '/indexreadme',
-                    component: resolve => require(['../components/page/IndexReadme.vue'], resolve)
+                    component: resolve => require(['../components/page/IndexReadme.vue'], resolve)  // 首页
                 },
                 {
                     path: '/basetable',
@@ -52,6 +52,46 @@ export default new Router({
                 {
                     path: '/drag',
                     component: resolve => require(['../components/page/DragList.vue'], resolve)    // 拖拽列表组件
+                },
+                {
+                    path: '/submitwork',
+                    component: resolve => require(['../components/page/SubmitWork.vue'], resolve)    // 提交作业
+                },
+                {
+                    path: '/submitproject',
+                    component: resolve => require(['../components/page/SubmitProject.vue'], resolve)    // 提交项目
+                },
+                {
+                    path: '/submitresume',
+                    component: resolve => require(['../components/page/SubmitResume.vue'], resolve)    //上传简历
+                },
+                {
+                    path: '/synthesise',
+                    component: resolve => require(['../components/page/SynthesiseTable.vue'], resolve)    //综合考评分
+                },
+                {
+                    path: '/classmanagement',
+                    component: resolve => require(['../components/page/ClassManagement.vue'], resolve)    //班级管理积极性
+                },
+                {
+                    path: '/speech',
+                    component: resolve => require(['../components/page/Speech.vue'], resolve)    //演讲查询
+                },
+                {
+                    path: '/studentsfile',
+                    component: resolve => require(['../components/page/StudentsFile.vue'], resolve)    //学员档案
+                },
+                {
+                    path: '/attendancerecords',
+                    component: resolve => require(['../components/page/AttendanceRecords.vue'], resolve)    //考勤记录
+                },
+                {
+                    path: '/disciplinaryrecord',
+                    component: resolve => require(['../components/page/DisciplinaryRecord.vue'], resolve)    //违纪记录
+                },
+                {
+                    path: '/praiserecord',
+                    component: resolve => require(['../components/page/PraiseRecord.vue'], resolve)    //考勤记录
                 }
             ]
         },
