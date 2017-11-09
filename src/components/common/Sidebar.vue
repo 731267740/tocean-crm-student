@@ -31,9 +31,9 @@
             return {
                 items: [
                     {
-                    icon: 'el-icon-star-on',
-                    index: 'indexreadme',
-                    title: '首页'
+                        icon: 'el-icon-star-on',
+                        index: 'indexreadme',
+                        title: '首页'
                     },
                     {
                         icon: 'el-icon-search',
