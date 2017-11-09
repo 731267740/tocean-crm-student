@@ -36,7 +36,11 @@ module.exports = {
                 }
             },
             '/ms':{
-                target: 'http://www.easy-mock.com/mock/5a0110ee9d3ceb4a354346d9',
+                target:'https://www.easy-mock.com/mock/5a0110ee9d3ceb4a354346d9',
+                changeOrigin: true
+            },
+            '/student':{
+                target:'http://192.168.4.100:8090',
                 changeOrigin: true
             },
             // '/student':{
