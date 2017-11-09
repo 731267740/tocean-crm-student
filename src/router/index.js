@@ -52,7 +52,40 @@ export default new Router({
                 {
                     path: '/drag',
                     component: resolve => require(['../components/page/DragList.vue'], resolve)    // 拖拽列表组件
+                },
+                {
+                    path: '/surveyadd',
+                    component: resolve => require(['../components/page/SurveyAdd.vue'], resolve)
+                },
+                {
+                    path: '/surveyhistory',
+                    component: resolve => require(['../components/page/SurveyHistory.vue'], resolve)
+                },
+                {
+                    path: '/dailycommit',
+                    component: resolve => require(['../components/page/DailyCommit.vue'], resolve)
+                },
+                {
+                    path: '/dailyhistory',
+                    component: resolve => require(['../components/page/DailyHistory.vue'], resolve)
+                },
+                {
+                    path: '/weeklycommit',
+                    component: resolve => require(['../components/page/WeeklyCommit.vue'], resolve)
+                },
+                {
+                    path: '/weeklyhistory',
+                    component: resolve => require(['../components/page/WeeklyHistory.vue'], resolve)
+                },
+                {
+                    path: '/projectcheck',
+                    component: resolve => require(['../components/page/ProjectCheck.vue'], resolve)
+                },
+                {
+                    path: '/workfinish',
+                    component: resolve => require(['../components/page/WorkFinish.vue'], resolve)
                 }
+
             ]
         },
         {

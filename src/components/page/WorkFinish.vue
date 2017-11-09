@@ -1,0 +1,213 @@
+<template>
+    <div class="table">
+        <div class="crumbs">
+            <el-breadcrumb separator="/">
+                <el-breadcrumb-item><i class="el-icon-menu"></i> 学员信息查询</el-breadcrumb-item>
+                <el-breadcrumb-item>作业完成情况</el-breadcrumb-item>
+            </el-breadcrumb>
+        </div>
+        <div class="select">
+        <div class="select1">
+        班级：<el-select v-model="value01" placeholder="请选择">
+        <el-option
+            v-for="item in options1"
+            :key="item.value01"
+            :label="item.label01"
+            :value="item.value01">
+        </el-option>
+        </el-select>
+        </div>
+        <div class="select2">
+        课程：<el-select v-model="value" placeholder="请选择">
+        <el-option
+            v-for="item in options2"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </el-option>
+        </el-select>
+        </div>
+        <div class="search">学员：<el-input class="inp" v-model="select_word">
+            </el-input><el-button class="btn">查询</el-button>
+        </div>
+        </div>
+
+        <div  class="txt" >
+            <span>全部文件</span>
+            <span style="margin-left: 850px">已全部加载，共10个</span>
+        </div>
+
+        <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="55"></el-table-column>
+            <el-table-column prop="name1" label="序号" ></el-table-column>
+            <el-table-column prop="name" label="学员" ></el-table-column>
+            <el-table-column prop="class" label="班级"></el-table-column>
+            <el-table-column prop="word" label="作业标题" ></el-table-column>
+            <el-table-column prop="date" label="布置日期" ></el-table-column>
+            <el-table-column prop="word" label="课程"></el-table-column>
+            <el-table-column prop="number" label="分数"></el-table-column>
+
+        </el-table>
+        <div class="pagination">
+            <el-pagination
+                    @current-change ="handleCurrentChange"
+                    layout="prev, pager, next"
+                    :total="1000">
+            </el-pagination>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                url: './static/vuetable.json',
+                tableData: [],
+                cur_page: 1,
+                multipleSelection: [],
+                select_cate: '',
+                select_word: '',
+                del_list: [],
+                is_search: false,
+                value01: '',
+                value: '',
+
+                options1: [{
+                    value01: '0',
+                    label01: ' '
+                }, {
+                    value01: '1',
+                    label01: 'SD201701'
+                }, {
+                    value01: '2',
+                    label01: 'SD201702'
+                }, {
+                    value01: '3',
+                    label01: 'SD201703'
+                }, {
+                    value01: '4',
+                    label01: 'SD201704'
+                }, {
+                    value01: '5',
+                    label01: 'SD201705'
+                }],
+
+                options2: [{
+                    value: '选项0',
+                    label: ' '
+                },
+                    {
+                    value: '选项1',
+                    label: 'JavaScript'
+                }, {
+                    value: '选项2',
+                    label: 'Java'
+                }, {
+                    value: '选项3',
+                    label: 'Linux'
+                }, {
+                    value: '选项4',
+                    label: 'jQuery'
+                }, {
+                    value: '选项5',
+                    label: 'Vue'
+                }],
+
+            }
+        },
+        created(){
+            this.getData();
+        },
+        computed: {
+            data(){
+                const self = this;
+                return self.tableData.filter(function(d){
+                    let is_del = false;
+                    for (let i = 0; i < self.del_list.length; i++) {
+                        if(d.name === self.del_list[i].name){
+                            is_del = true;
+                            break;
+                        }
+                    }
+                    if(!is_del){
+                        if(d.name.indexOf(self.select_word) > -1 ) {
+                            return d;
+                        }
+                    }
+                })
+            }
+        },
+        methods: {
+            handleCurrentChange(val){
+                this.cur_page = val;
+                this.getData();
+            },
+            getData(){
+                let self = this;
+                if(process.env.NODE_ENV === 'development'){
+                    self.url = 'ms/crmxxd/jiao';
+                };
+                self.$axios.get(self.url, {page:self.cur_page}).then((res) => {
+                    self.tableData = res.data.data.projects;
+                })
+            },
+            search(){
+                this.is_search = true;
+            },
+            formatter(row, column) {
+                return row.address;
+            },
+            filterTag(value, row) {
+                return row.tag === value;
+            },
+            handleEdit(index, row) {
+                this.$message('编辑第'+(index+1)+'行');
+            },
+            handleDelete(index, row) {
+                this.$message.error('删除第'+(index+1)+'行');
+            },
+            delAll(){
+                const self = this,
+                    length = self.multipleSelection.length;
+                let str = '';
+                self.del_list = self.del_list.concat(self.multipleSelection);
+                for (let i = 0; i < length; i++) {
+                    str += self.multipleSelection[i].name + ' ';
+                }
+                self.$message.error('删除了'+str);
+                self.multipleSelection = [];
+            },
+            handleSelectionChange(val) {
+                this.multipleSelection = val;
+            }
+        }
+    }
+</script>
+
+<style >
+    .select{
+        display: flex;
+        flex-direction: row;
+    }
+    .select2 {
+        margin-left: 20px;
+    }
+    .search{
+        margin-left: 20px;
+    }
+    .el-table{
+        margin-top: 10px;
+    }
+    .txt{
+        margin-top: 15px;
+        font-size: 5px;
+    }
+    .inp{
+        width: 215px;
+    }
+    .btn{
+        margin-left: 10px;
+    }
+
+</style>

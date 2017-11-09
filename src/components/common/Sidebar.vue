@@ -81,7 +81,63 @@
                         icon: 'el-icon-upload2',
                         index: 'drag',
                         title: '拖拽'
+                    },
+                    {
+                        icon: 'el-icon-document',
+                        index: '11',
+                        title: '提交报告',
+                        subs: [
+                            {
+                                index: 'dailycommit',
+                                title: '提交日报'
+                            },
+                            {
+                                index: 'weeklycommit',
+                                title: '提交周报'
+                            },
+                            {
+                                index: 'dailyhistory',
+                                title: '历史日报'
+                            },
+                            {
+                                index: 'weeklyhistory',
+                                title: '历史周报'
+                            }
+
+                        ]
+                    },
+                    {
+                        icon: 'el-icon-edit',
+                        index: '1',
+                        title: '问卷调查',
+                        subs: [
+                            {
+                                index: 'surveyadd',
+                                title: '填写问卷'
+                            },
+                            {
+                                index: 'surveyhistory',
+                                title: '历史问卷'
+                            }
+                        ]
+                    },
+                    {
+                        icon: 'el-icon-document',
+                        index: '111',
+                        title: '学员信息查询',
+                        subs: [
+                            {
+                                index: 'workfinish',
+                                title: '作业完成情况'
+                            },
+                            {
+                                index: 'projectcheck',
+                                title: '项目考核情况'
+                            }
+                        ]
                     }
+
+
                 ]
             }
         },
@@ -98,10 +154,13 @@
         display: block;
         position: absolute;
         width: 250px;
+        height: 100%;
         left: 0;
         top: 70px;
         bottom:0;
         background: #2E363F;
+        overflow-x: scroll;
+        -webkit-scrollbat:none;
     }
     .sidebar > ul {
         height:100%;

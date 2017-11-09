@@ -7,9 +7,9 @@
         </div>
         <div class="drag-box-left">
             <div class="drag-title">拖动排序</div>
-            <div class="drag-list" draggable="true" 
-                v-for="list in data1" 
-                :data-id="list.id" 
+            <div class="drag-list" draggable="true"
+                v-for="list in data1"
+                :data-id="list.id"
                 @dragstart="dragstartEvent"
                 @dragend="dragendEvent"
                 @dragenter="dragenterEvent"
