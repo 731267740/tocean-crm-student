@@ -10,8 +10,7 @@
             <el-button type="primary" icon="">新建问卷</el-button>
             <el-button type="primary" icon="delete" @click="delAll">删除</el-button>
             <el-button type="primary" icon="edit">修改</el-button>
-            <el-input  placeholder="输入名称或对象搜索您的文件" icon="search" v-model="select_word"  class="search"></el-input>
-
+            <el-input  placeholder="输入名称搜索您的文件" icon="search" v-model="select_word"  class="search"></el-input>
         </div>
         <div class="txt">
             <span>全部文件</span>
@@ -21,7 +20,6 @@
             <el-table-column prop="name1" label="序号" ></el-table-column>
             <el-table-column prop="word" label="调查名称" ></el-table-column>
             <el-table-column prop="sentence" label="调查内容"></el-table-column>
-            <el-table-column prop="name" label="考评对象"></el-table-column>
             <el-table-column prop="date" label="调查时间"></el-table-column>
         </el-table>
 
@@ -57,7 +55,7 @@
                         }
                     }
                     if(!is_del){
-                        if(d.name.indexOf(self.select_word) > -1 ||
+                        if(
                             d.word.indexOf(self.select_word) > -1
                         ){
                             return d;
@@ -116,7 +114,6 @@
 <style >
 .search{
     width: 300px;
-    margin-left: 710px;
 }
 .el-table{
     margin-top: 10px;

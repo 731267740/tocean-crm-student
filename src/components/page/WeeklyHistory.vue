@@ -10,7 +10,7 @@
             <el-button type="primary" icon="">新建周报</el-button>
             <el-button type="primary" icon="delete" @click="delAll">删除</el-button>
             <el-button type="primary" icon="edit">修改</el-button>
-            <el-input  placeholder="输入关键字搜索您的文件" icon="search"   class="sp"></el-input>
+            <el-input  placeholder="输入关键字搜索您的文件" icon="search" class="sp" v-model="select_word"></el-input>
 
         </div>
         <div class="txt" >
@@ -20,10 +20,9 @@
         <el-table :data="data" border style="width: 100%" ref="multipleTable" >
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column prop="name1" label="序号" ></el-table-column>
-            <el-table-column prop="word" label="调查名称" ></el-table-column>
-            <el-table-column prop="sentence" label="调查内容"></el-table-column>
-            <el-table-column prop="name" label="考评对象"></el-table-column>
-            <el-table-column prop="date" label="调查时间"></el-table-column>
+            <el-table-column prop="word" label="提交标题" ></el-table-column>
+            <el-table-column prop="sentence" label="提交内容"></el-table-column>
+            <el-table-column prop="date" label="提交时间"></el-table-column>
         </el-table>
 
     </div>
@@ -58,9 +57,8 @@
                         }
                     }
                     if(!is_del){
-                        if(d.address.indexOf(self.select_cate) > -1 &&
-                            (d.name.indexOf(self.select_word) > -1 ||
-                            d.address.indexOf(self.select_word) > -1)
+                        if(
+                            d.word.indexOf(self.select_word) > -1
                         ){
                             return d;
                         }
@@ -119,7 +117,6 @@
 <style >
     .sp{
         width: 300px;
-        margin-left: 710px;
     }
     .el-table{
         margin-top: 10px;

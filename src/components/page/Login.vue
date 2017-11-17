@@ -24,6 +24,7 @@
             return {
                 ruleForm: {
                     username: '',
+                    name:'',
                     password: ''
                 },
                 rules: {
@@ -41,27 +42,33 @@
         methods: {
             submitForm(formName) {
                 const self = this;
+                //使用模拟数据进行登录
+/*
+                self.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        localStorage.setItem('USERNAME',self.ruleForm.username);
+                        self.$router.push('/indexreadme');
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+*/
 
-//                self.$refs[formName].validate((valid) => {
-//                    if (valid) {
-//                        localStorage.setItem('ms_username',self.ruleForm.username);
-//                        self.$router.push('/indexreadme');
-//                    } else {
-//                        console.log('error submit!!');
-//                        return false;
-//                    }
+                //调用后端接口进行登录
 
                 self.$refs[formName].validate((valid) => {
                 if (valid) {
                     var param = { //传给后端的数据
                         username: self.ruleForm.username,
+                        name: self.ruleForm.name,
                         password: self.ruleForm.password
                     };
                     self.$axios.post(self.url, param).then((res) => {//调用后端接口进行登录
                         console.log(res.data.success);
                         if (res.data.success) { //登录成功
                             localStorage.setItem('USERNAME', self.ruleForm.username);
-                            localStorage.setItem('JWT_TOKEN', res.data.success);
+                            localStorage.setItem('JWT_TOKEN', res.data.result);
                             self.$router.push('/indexreadme')
                         } else {
                             self.errorMsg = res.data.error;
@@ -72,6 +79,8 @@
                     return false;
                 }
             });
+
+
         }
     }
     }

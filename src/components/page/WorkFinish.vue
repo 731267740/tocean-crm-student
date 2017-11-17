@@ -2,21 +2,12 @@
     <div class="table">
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i> 学员信息查询</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-menu"></i> 学生个人综合信息</el-breadcrumb-item>
                 <el-breadcrumb-item>作业完成情况</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="select">
-        <div class="select1">
-        班级：<el-select v-model="value01" placeholder="请选择">
-        <el-option
-            v-for="item in options1"
-            :key="item.value01"
-            :label="item.label01"
-            :value="item.value01">
-        </el-option>
-        </el-select>
-        </div>
+
         <div class="select2">
         课程：<el-select v-model="value" placeholder="请选择">
         <el-option
@@ -27,8 +18,9 @@
         </el-option>
         </el-select>
         </div>
-        <div class="search">学员：<el-input class="inp" v-model="select_word">
-            </el-input><el-button class="btn">查询</el-button>
+        <div class="search">作业标题：
+            <el-input class="inp" v-model="select_word"></el-input>
+            <el-button class="btn">查询</el-button>
         </div>
         </div>
 
@@ -40,19 +32,16 @@
         <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column prop="name1" label="序号" ></el-table-column>
-            <el-table-column prop="name" label="学员" ></el-table-column>
-            <el-table-column prop="class" label="班级"></el-table-column>
             <el-table-column prop="word" label="作业标题" ></el-table-column>
             <el-table-column prop="date" label="布置日期" ></el-table-column>
             <el-table-column prop="word" label="课程"></el-table-column>
             <el-table-column prop="number" label="分数"></el-table-column>
-
         </el-table>
         <div class="pagination">
             <el-pagination
                     @current-change ="handleCurrentChange"
                     layout="prev, pager, next"
-                    :total="1000">
+                    :total="50">
             </el-pagination>
         </div>
     </div>
@@ -131,7 +120,7 @@
                         }
                     }
                     if(!is_del){
-                        if(d.name.indexOf(self.select_word) > -1 ) {
+                        if(d.word.indexOf(self.select_word) > -1 ) {
                             return d;
                         }
                     }

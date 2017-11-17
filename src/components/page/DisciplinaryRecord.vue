@@ -2,23 +2,21 @@
     <div class="table">
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i> 当前功能：</el-breadcrumb-item>
-                <el-breadcrumb-item>学员违纪信息查询</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-menu"></i> 学生个人综合信息：</el-breadcrumb-item>
+                <el-breadcrumb-item>我的违纪信息</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="handle-box">
             <div>
-                班级：
+                星期：
             <el-select size="small" v-model="select_cate" placeholder="选择班级" class="handle-select mr10">
                 <el-option key="0" label="" value=""></el-option>
-                <el-option key="1" label="粤语班" value="粤语班"></el-option>
-                <el-option key="2" label="北京话班" value="北京话班"></el-option>
-                <el-option key="3" label="上海话班" value="上海话班"></el-option>
-                <el-option key="4" label="四川话班" value="四川话班"></el-option>
-                <el-option key="5" label="天津话班" value="天津话班"></el-option>
+                <el-option key="1" label="星期一" value="星期一"></el-option>
+                <el-option key="2" label="星期二" value="星期二"></el-option>
+                <el-option key="3" label="星期三" value="星期三"></el-option>
+                <el-option key="4" label="星期四" value="星期四"></el-option>
+                <el-option key="5" label="星期五" value="星期五"></el-option>
             </el-select>
-                &nbsp;&nbsp;&nbsp;
-                学员：<el-input size="small" v-model="select_word" class="handle-input mr10" style="width: 100px"></el-input>
                 &nbsp;&nbsp; 时间：
                 <el-date-picker
                 v-model="value4"
@@ -34,19 +32,17 @@
         </div>
         <el-collapse v-model="activeNames">
             <el-collapse-item title="学员违纪信息列表" name="1">
-                <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
-                    <el-table-column prop="name1" label="序号">         </el-table-column>
-                    <el-table-column prop="name" label="学员">          </el-table-column>
-                    <el-table-column prop="pick" label="班级">          </el-table-column>
+                <el-table :data="data" border style="width: 100%" ref="multipleTable">
+                    <el-table-column prop="" label="序号">               </el-table-column>
                     <el-table-column prop="" label="违纪时间">           </el-table-column>
                     <el-table-column prop="" label="违纪情况">           </el-table-column>
-                    <el-table-column prop="" label="学员违纪态度">        </el-table-column>
+                    <el-table-column prop="" label="违纪态度">           </el-table-column>
                 </el-table>
                 <div class="pagination">
                     <el-pagination
                         @current-change ="handleCurrentChange"
                         layout="prev, pager, next"
-                        :total="100">
+                        :total="30">
                     </el-pagination>
                 </div>
             </el-collapse-item>
@@ -64,7 +60,6 @@
                 multipleSelection: [],
                 select_cate: '',
                 select_word: '',
-                del_list: [],
                 is_search: false,
                 pickerOptions2: {
                     shortcuts: [{

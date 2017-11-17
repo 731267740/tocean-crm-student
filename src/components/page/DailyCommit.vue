@@ -10,7 +10,7 @@
             <el-button type="primary" icon="">新建日报</el-button>
             <el-button type="primary" icon="delete" @click="delAll">删除</el-button>
             <el-button type="primary" icon="edit">修改</el-button>
-            <el-input  placeholder="输入标题或对象搜索您的文件" icon="search" v-model="select_word"  class="sp"></el-input>
+            <el-input  placeholder="输入标题搜索您的文件" icon="search" v-model="select_word"  class="sp"></el-input>
 
         </div>
         <div class="txt" >
@@ -22,7 +22,6 @@
             <el-table-column prop="name1" label="序号" ></el-table-column>
             <el-table-column prop="word" label="提交标题" ></el-table-column>
             <el-table-column prop="sentence" label="提交内容"></el-table-column>
-            <el-table-column prop="name" label="提交对象"></el-table-column>
             <el-table-column prop="date" label="提交时间"></el-table-column>
         </el-table>
 
@@ -58,7 +57,7 @@
                         }
                     }
                     if(!is_del){
-                        if(d.name.indexOf(self.select_word) > -1 ||
+                        if(
                             d.word.indexOf(self.select_word) > -1
                         ){
                             return d;
@@ -117,7 +116,6 @@
 <style >
     .sp{
         width: 300px;
-        margin-left: 710px;
     }
     .el-table{
         margin-top: 10px;

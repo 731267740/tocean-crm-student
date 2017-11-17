@@ -13,6 +13,8 @@
                     <el-button type="primary" @click="handleCommand('login')" command="login">请登录</el-button>
                 </span>
                 <el-dropdown-menu v-if="!!username" slot="dropdown">
+                    <el-dropdown-item command="Personal information">个人信息</el-dropdown-item>
+                    <el-dropdown-item command="UpPassword">密码修改</el-dropdown-item>
                     <el-dropdown-item command="loginout">退出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
@@ -24,7 +26,8 @@
     export default {
         components: {ElButton}, data() {
             return {
-                name: ''
+                name: '',
+                profile:{}
             }
         },
         computed:{
@@ -34,13 +37,27 @@
             }
         },
         methods:{
+            getData(){
+                let self = this;
+                if (process.env.NODE_ENV === 'development') {
+                    self.url = '/student/api/profile';
+                }
+                self.$axios.get(self.url).then((res) => {
+                    self.profile = res.data.result;
+                })
+            },
             handleCommand(command) {
-                if(command == 'loginout'){
+                if(command === 'loginout'){
                     localStorage.removeItem('USERNAME');
                     localStorage.removeItem('JWT_TOKEN');
                     this.$router.go(0);
-                }else if(command == 'login'){
+                    this.$router.push('/indexreadme');
+                }else if(command === 'login'){
                     this.$router.push('/login');
+                }else if(command === 'Personal information'){
+                    this.$router.push('/personalinformation');
+                }else if(command === 'UpPassword'){
+                    this.$router.push('/uppassword');
                 }
             }
         }

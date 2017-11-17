@@ -2,22 +2,13 @@
     <div class="table">
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i> 学员信息查询</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-menu"></i>学生个人综合信息</el-breadcrumb-item>
                 <el-breadcrumb-item>项目考核情况</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
 
         <div class="select">
-            <div class="select1">
-                班级：<el-select v-model="value01" placeholder="请选择">
-                <el-option
-                    v-for="item in options1"
-                    :key="item.value01"
-                    :label="item.label01"
-                    :value="item.value01">
-                </el-option>
-            </el-select>
-            </div>
+
             <div class="select2">
                 课程：<el-select v-model="value" placeholder="请选择">
                 <el-option
@@ -28,7 +19,7 @@
                 </el-option>
             </el-select>
             </div>
-            <div class="search">学员：<el-input class="inp" v-model="select_word"></el-input></div>
+            <div class="search">项目：<el-input class="inp" v-model="select_word"></el-input></div>
         </div>
 
         <div class="block">
@@ -50,17 +41,14 @@
             <span style="margin-left: 850px">已全部加载，共10个</span>
         </div>
 
-        <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
-            <el-table-column type="selection" width="55"></el-table-column>
+        <el-table :data="data" border style="width: 100%" ref="multipleTable">
             <el-table-column prop="name1" label="序号" ></el-table-column>
-            <el-table-column prop="name" label="学员" ></el-table-column>
-            <el-table-column prop="class" label="班级"></el-table-column>
             <el-table-column prop="word" label="项目" ></el-table-column>
             <el-table-column prop="date" label="考核日期" ></el-table-column>
             <el-table-column prop="word" label="考核类型"></el-table-column>
             <el-table-column prop="number" label="分数"></el-table-column>
 
-        </el-table>>
+        </el-table>
         <div class="pagination">
             <el-pagination
                     @current-change ="handleCurrentChange"
@@ -137,7 +125,7 @@
                         }
                     }
                     if(!is_del){
-                        if(d.name.indexOf(self.select_word) > -1 ) {
+                        if(d.word.indexOf(self.select_word) > -1 ) {
                             return d;
                         }
                     }

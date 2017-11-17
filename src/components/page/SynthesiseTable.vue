@@ -7,25 +7,27 @@
             </el-breadcrumb>
         </div>
         <div class="handle-box">
-            <el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">可批量删除</el-button>
-            <el-select v-model="select_cate" placeholder="选择班级" class="handle-select mr10">
+            选择单项:
+            <el-select v-model="sall" placeholder="" class="handle-select mr10">
                 <el-option key="0" label="" value=""></el-option>
-                <el-option key="1" label="粤语班" value="粤语班"></el-option>
-                <el-option key="2" label="北京话班" value="北京话班"></el-option>
-                <el-option key="3" label="上海话班" value="上海话班"></el-option>
-                <el-option key="4" label="四川话班" value="四川话班"></el-option>
-                <el-option key="5" label="天津话班" value="天津话班"></el-option>
+                <el-option key="1" label="考勤" value="考勤"></el-option>
+                <el-option key="2" label="违纪" value="违纪"></el-option>
+                <el-option key="3" label="表扬" value="表扬"></el-option>
+                <el-option key="4" label="班级考评" value="班级考评"></el-option>
+                <el-option key="5" label="原始分" value="原始分"></el-option>
+                <el-option key="5" label="职业素质" value="职业素质"></el-option>
+                <el-option key="5" label="项目分" value="项目分"></el-option>
+                <el-option key="5" label="作业分" value="作业分"></el-option>
+                <el-option key="5" label="技术分" value="技术分"></el-option>
+                <el-option key="5" label="沟通能力分" value="沟通能力分"></el-option>
             </el-select>
             <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
             <el-button type="primary" icon="search" @click="search">搜索</el-button>
         </div>
         <el-collapse v-model="activeNames">
             <el-collapse-item title="基本项目资料" name="1">
-                <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
-                    <el-table-column type="selection" width="55">                 </el-table-column>
+                <el-table :data="data" border style="width: 100%" ref="multipleTable">
                     <el-table-column prop="name1" label="序号">                   </el-table-column>
-                    <el-table-column prop="name" label="学员">                    </el-table-column>
-                    <el-table-column prop="pick" label="班级" width="95">         </el-table-column>
                     <el-table-column prop="number9" label="考勤扣分" width="95">   </el-table-column>
                     <el-table-column prop="number8" label="违纪扣分" width="95">   </el-table-column>
                     <el-table-column prop="number1" label="表扬加分" width="95">   </el-table-column>
@@ -55,11 +57,8 @@
             return {
                 activeNames: ['1'],
                 tableData: [],
-                cur_page: 1,
                 multipleSelection: [],
-                select_cate: '',
-                select_word: '',
-                del_list: [],
+                sall:'',
                 is_search: true
             }
         },
@@ -70,27 +69,12 @@
             data(){
                 const self = this;
                 return self.tableData.filter(function(d){
-                    let is_del = false;
-                    for (let i = 0; i < self.del_list.length; i++) {
-                        if(d.name === self.del_list[i].name){
-                            is_del = true;
-                            break;
-                        }
-                    }
-                    if(!is_del){
-                        if(d.pick.indexOf(self.select_cate) > -1 &&
-                            (d.name.indexOf(self.select_word) > -1 ||
-                            d.pick.indexOf(self.select_word) > -1)
-                        ){
-                            return d;
-                        }
-                    }
+                   return true;
                 })
             }
         },
         methods: {
             handleCurrentChange(val){
-                this.cur_page = val;
                 this.getData();
             },
             getData(){
@@ -98,37 +82,13 @@
                 if (process.env.NODE_ENV === 'development') {
                     self.url = '/ms/crmxxd/msc';
                 }
-
-                self.$axios.get(self.url, {page: self.cur_page}).then((res) => {
+                self.$axios.get(self.url).then((res) => {
                     self.tableData = res.data.dataall.projects;
                 })
 
             },
             search(){
                 this.is_search = true;
-            },
-            formatter(row, column) {
-                return row.address;
-            },
-            filterTag(value, row) {
-                return row.tag === value;
-            },
-            handleEdit(index, row) {
-                this.$message('编辑第'+(index+1)+'行');
-            },
-            handleDelete(index, row) {
-                this.$message.error('删除第'+(index+1)+'行');
-            },
-            delAll(){
-                const self = this,
-                    length = self.multipleSelection.length;
-                let str = '';
-                self.del_list = self.del_list.concat(self.multipleSelection);
-                for (let i = 0; i < length; i++) {
-                    str += self.multipleSelection[i].name + ' ';
-                }
-                self.$message.error('删除了'+str);
-                self.multipleSelection = [];
             },
             handleSelectionChange(val) {
                 this.multipleSelection = val;

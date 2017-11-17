@@ -2,29 +2,14 @@
     <div class="table">
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i> 当前功能：</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-menu"></i> 学生个人综合信息：</el-breadcrumb-item>
                 <el-breadcrumb-item>演讲查询</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
-        <div class="handle-box">
-            <el-select v-model="select_cate" placeholder="选择班级" class="handle-select mr10">
-                <el-option key="0" label="" value=""></el-option>
-                <el-option key="1" label="粤语班" value="粤语班"></el-option>
-                <el-option key="2" label="北京话班" value="北京话班"></el-option>
-                <el-option key="3" label="上海话班" value="上海话班"></el-option>
-                <el-option key="4" label="四川话班" value="四川话班"></el-option>
-                <el-option key="5" label="天津话班" value="天津话班"></el-option>
-            </el-select>
-            <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-            <el-button type="primary" icon="search" @click="search">搜索</el-button>
-        </div>
         <el-collapse v-model="activeNames">
             <el-collapse-item title="基本项目资料" name="1">
-                <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
-                    <el-table-column type="selection" width="55">        </el-table-column>
-                    <el-table-column prop="name1" label="序号">                </el-table-column>
-                    <el-table-column prop="pick" label="班级">            </el-table-column>
-                    <el-table-column prop="name" label="学员">            </el-table-column>
+                <el-table :data="data" border style="width: 100%" ref="multipleTable" >
+                    <el-table-column prop="name1" label="序号">           </el-table-column>
                     <el-table-column prop="number10" label="演讲日期">    </el-table-column>
                     <el-table-column prop="number11" label="演讲内容">    </el-table-column>
                     <el-table-column prop="number12" label="项目经理">     </el-table-column>
@@ -53,8 +38,6 @@
                 multipleSelection: [],
                 select_cate: '',
                 select_word: '',
-                del_list: [],
-                is_search: false
             }
         },
         created(){
@@ -64,27 +47,12 @@
             data(){
                 const self = this;
                 return self.tableData.filter(function(d){
-                    let is_del = false;
-                    for (let i = 0; i < self.del_list.length; i++) {
-                        if(d.name === self.del_list[i].name){
-                            is_del = true;
-                            break;
-                        }
-                    }
-                    if(!is_del){
-                        if(d.pick.indexOf(self.select_cate) > -1 &&
-                            (d.name.indexOf(self.select_word) > -1 ||
-                            d.pick.indexOf(self.select_word) > -1)
-                        ){
-                            return d;
-                        }
-                    }
-                })
+                   return true;
+            })
             }
         },
         methods: {
             handleCurrentChange(val){
-                this.cur_page = val;
                 this.getData();
             },
             getData(){
@@ -93,7 +61,7 @@
                     self.url = '/ms/crmxxd/msc';
                 }
 
-                self.$axios.get(self.url, {page: self.cur_page}).then((res) => {
+                self.$axios.get(self.url).then((res) => {
                     self.tableData = res.data.dataall.projects;
                 })
 

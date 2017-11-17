@@ -36,50 +36,6 @@
                         title: '首页'
                     },
                     {
-                        icon: 'el-icon-search',
-                        index: '10',
-                        title: '学员信息查询',
-                        subs: [
-                            {
-                                index: 'studentsfile',
-                                title: '学员档案'
-                            },
-                            {
-                                index: 'attendancerecords',
-                                title: '考勤记录'
-                            },
-                            {
-                                index: 'disciplinaryrecord',
-                                title: '违纪记录'
-                            },
-                            {
-                                index: 'praiserecord',
-                                title: '表扬记录'
-                            },
-                            {
-                                index: 'workfinish',
-                                title: '作业完成情况'
-                            },
-                            {
-                                index: 'projectcheck',
-                                title: '项目考核情况'
-                            },
-                            {
-                                index: 'classmanagement',
-                                title: '班级管理积极性'
-                            },
-                            {
-                                index: 'speech',
-                                title: '演讲查询'
-                            },
-                            {
-                                index: 'synthesise',
-                                title: '综合考评分'
-                            },
-
-                        ]
-                    },
-                    {
                         icon: 'el-icon-date',
                         index: 'submitwork',
                         title: '提交作业'
@@ -88,59 +44,6 @@
                         icon: 'el-icon-date',
                         index: 'submitproject',
                         title: '提交项目'
-                    },
-                    {
-                        icon: 'el-icon-date',
-                        index: 'submitresume',
-                        title: '上传简历'
-                    },
-                    {
-                        icon: 'el-icon-menu',
-                        index: '2',
-                        title: '表格',
-                        subs: [
-                            {
-                                index: 'basetable',
-                                title: '基础表格'
-                            },
-                            {
-                                index: 'vuetable',
-                                title: 'Vue表格组件'
-                            }
-                        ]
-                    },
-                    {
-                        icon: 'el-icon-date',
-                        index: '3',
-                        title: '表单',
-                        subs: [
-                            {
-                                index: 'baseform',
-                                title: '基本表单'
-                            },
-                            {
-                                index: 'vueeditor',
-                                title: '编辑器'
-                            },
-                            {
-                                index: 'markdown',
-                                title: 'markdown'
-                            },
-                            {
-                                index: 'upload',
-                                title: '文件上传'
-                            }
-                        ]
-                    },
-                    {
-                        icon: 'el-icon-star-on',
-                        index: 'basecharts',
-                        title: '图表'
-                    },
-                    {
-                        icon: 'el-icon-upload2',
-                        index: 'drag',
-                        title: '拖拽'
                     },
                     {
                         icon: 'el-icon-document',
@@ -181,8 +84,60 @@
                             }
                         ]
                     },
-
-                    ]
+                    {
+                        icon: 'el-icon-date',
+                        index: 'submitresume',
+                        title: '上传简历'
+                    },
+                    {
+                        icon: 'el-icon-date',
+                        index: 'jobapplication',
+                        title: '就业申请'
+                    },
+                    {
+                        icon: 'el-icon-search',
+                        index: '10',
+                        title: '学生个人综合信息',
+                        subs: [
+                            {
+                                index: 'attendancerecords',
+                                title: '考勤记录'
+                            },
+                            {
+                                index: 'disciplinaryrecord',
+                                title: '违纪记录'
+                            },
+                            {
+                                index: 'praiserecord',
+                                title: '表扬记录'
+                            },
+                            {
+                                index: 'workfinish',
+                                title: '作业完成情况'
+                            },
+                            {
+                                index: 'projectcheck',
+                                title: '项目考核情况'
+                            },
+//                            {
+//                                index: 'classmanagement',
+//                                title: '班级管理积极性'
+//                            },
+                            {
+                                index: 'speech',
+                                title: '我的演讲'
+                            },
+                            {
+                                index: 'groupdiscuss',
+                                title: '我的分组讨论'
+                            },
+                            {
+                                index: 'synthesise',
+                                title: '综合考评分'
+                            }
+                        ]
+                    },
+                ]
             }
         },
         computed:{
@@ -205,13 +160,12 @@
         display: block;
         position: absolute;
         width: 250px;
-        height: 100%;
         left: 0;
         top: 70px;
         bottom:0;
         background: #2E363F;
         overflow-x:scroll;
-        /*-webkit-scrollbar:none;*/
+        -webkit-scrollbar:none;
     }
     .sidebar > ul {
         height:100%;

@@ -124,6 +124,22 @@ export default new Router({
                 {
                     path: '/praiserecord',
                     component: resolve => require(['../components/page/PraiseRecord.vue'], resolve)    //考勤记录
+                },
+                {
+                    path: '/personalinformation',
+                    component: resolve => require(['../components/page/PersonalInformation.vue'], resolve)    //个人信息
+                },
+                {
+                    path: '/uppassword',
+                    component: resolve => require(['../components/page/UpPassword.vue'], resolve)    //密码修改
+                },
+                {
+                    path: '/jobapplication',
+                    component: resolve => require(['../components/page/JobApplication.vue'], resolve)    //就业申请
+                },
+                {
+                    path: '/groupdiscuss',
+                    component: resolve => require(['../components/page/GroupDiscuss.vue'], resolve)    //我的分组讨论
                 }
             ]
         },
